@@ -71,7 +71,7 @@
               repo = "agda-stdlib";
               owner = "agda";
               rev = "experimental";
-              sha256 = "sha256-l2+8myyJSufXpt1Opf65AJaTMiHMDeYYbuvkvzbCjDo=";
+              sha256 = "sha256-9hz16uRMrvFXe5CWh5Nsjb5NDyo0QBfeigUH95JcLDg=";
             };
           }))
         ]);
