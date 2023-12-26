@@ -29,7 +29,7 @@ import           System.Process
 ------------------------------------------------------------------------------
 -- | When true, dump out received JSON as it arrives.
 debugJson :: Bool
-debugJson = True
+debugJson = False
 
 
 ------------------------------------------------------------------------------

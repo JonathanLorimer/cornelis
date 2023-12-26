@@ -62,6 +62,25 @@
           (v: { name = "${name}-${v}"; value = pkgs.haskell.packages.${v}.${name}; })
           ghcVersions
         );
+  
+        # nix develop
+        devShell =  let
+          hsPkgs = pkgs.haskell.packages.${defaultGhcVersion};
+        in hsPkgs.shellFor {
+          name = "cornelis";
+          packages = p: [
+            p.${name}
+          ];
+
+          buildInputs = with pkgs;
+            [
+              # Haskell Deps
+              cabal-install
+              hlint
+              hsPkgs.haskell-language-server
+              hsPkgs.ghcid
+            ];
+        };
       }
     );
 }

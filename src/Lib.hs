@@ -3,6 +3,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE ViewPatterns      #-}
+{-# LANGUAGE RecordWildCards      #-}
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 
 module Lib where
@@ -51,7 +52,13 @@ respond b (DisplayInfo dp) = do
   respondToHelperFunction dp
   when (dp & hasn't #_GoalSpecific) $
     modifyBufferStuff b $ #bs_goals .~ dp
+  case dp of 
+    AllGoalsWarnings {..} -> 
+      let a = (ip_id &&& id) . gi_ip <$> di_all_visible 
+      in modifyBufferStuff b $ #bs_ips .~ M.fromList a
+    _ -> pure ()
   goalWindow b dp
+
 -- Update the buffer's interaction points map
 respond b (InteractionPoints ips) = do
   let ips' = mapMaybe sequenceInteractionPoint ips
